@@ -1,19 +1,20 @@
-// Last updated: 17/05/2025, 14:22:07
+// Last updated: 17/05/2025, 14:41:31
 class Solution {
     public int countKDifference(int[] nums, int k) {
 
-        // brute force
+        Map<Integer, Integer> mp = new HashMap<>();
 
-        int ans=0;
+        for (Integer ele : nums) {
+            mp.put(ele+k, mp.getOrDefault(ele+k, 0) + 1);
+        }
 
-        int n=nums.length;
-
-        for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                if(Math.abs(nums[i]-nums[j])==k) ans+=1;
+        int ans = 0;
+        for (Integer ele : nums) {
+            if (mp.containsKey(ele)) {
+                ans += mp.get(ele);
             }
         }
         return ans;
-        
+
     }
 }
